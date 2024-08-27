@@ -27,5 +27,5 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push mrjindoblu/portfolio:latest
+          docker push mrjindoblu/techfolio:latest
 
