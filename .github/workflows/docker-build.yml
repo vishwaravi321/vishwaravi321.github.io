@@ -15,30 +15,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Determine if this is a merge commit
-        id: check_merge
-        run: |
-          if [[ $(git log -1 --pretty=%P) =~ " " ]]; then
-            echo "This is a merge commit."
-            echo "MERGE_COMMIT=true" >> $GITHUB_ENV
-          else
-            echo "This is not a merge commit."
-            echo "MERGE_COMMIT=false" >> $GITHUB_ENV
-          fi
-
       - name: Build Docker image
-        if: env.MERGE_COMMIT == 'true'
         run: |
-          docker build -t your-dockerhub-username/your-image-name:latest .
+          docker build -t mrjindoblu/portfolio:latest .
 
       - name: Log in to Docker Hub
-        if: env.MERGE_COMMIT == 'true'
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Push Docker image
-        if: env.MERGE_COMMIT == 'true'
         run: |
           docker push your-dockerhub-username/your-image-name:latest
