@@ -32,4 +32,4 @@ jobs:
       # Push the Docker image to GitHub Container Registry
       - name: Push Docker image
         run: |
-          docker push ghcr.io/vishwaravi321/erpnext:latest
+          docker push ghcr.io/vishwaravi321/techfolio:latest
