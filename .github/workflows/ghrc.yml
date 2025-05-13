@@ -1,0 +1,35 @@
+# docker-build.yml
+
+name: Build Docker Image
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Log in to GitHub Container Registry (ghcr.io)
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GHCR_PASSWORD }}" | docker login ghcr.io -u ${{ secrets.GHCR_USR_NAME}} --password-stdin
+
+      # Build the Docker image with the specified build arguments
+      - name: Build Docker image
+        run: |
+          docker build --tag=ghcr.io/vishwaravi321/techfolio:latest .
+
+      # Push the Docker image to GitHub Container Registry
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/vishwaravi321/erpnext:latest
