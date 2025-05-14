@@ -1,6 +1,6 @@
 # docker-build.yml
 
-name: Build Docker Image
+name: Build Docker Image for GHCR
 
 on:
   push:
