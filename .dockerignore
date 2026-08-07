@@ -1,0 +1,10 @@
+.git
+.github
+.gitignore
+.dockerignore
+Dockerfile
+node_modules
+package*.json
+**/.DS_Store
+README.md
+LICENSE
